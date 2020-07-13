@@ -46,6 +46,16 @@ namespace Chessington.GameEngine.Pieces
                 availableMoves.Add(nextSquare);
             }
             
+            for (var i = -1; i <= 1; i+=2)
+            for (var j = -1; j <= 1; j+=2)
+            {
+                var square = new Square(currentSquare.Row + i, currentSquare.Col + j);
+                if (OpposingPiece(square, board))
+                {
+                    availableMoves.Add(square);
+                }
+            }
+
             availableMoves.RemoveAll(s => !InsideBoard(s));
             return availableMoves;
         }
