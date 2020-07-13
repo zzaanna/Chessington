@@ -20,9 +20,8 @@ namespace Chessington.GameEngine.Pieces
                     availableMoves.Add(Square.At(currentSquare.Row + sign1*1, currentSquare.Col + sign2*2));
                     availableMoves.Add(Square.At(currentSquare.Row + sign1*2, currentSquare.Col + sign2*1));
                 }
-            availableMoves.RemoveAll(s => !InsideBoard(s));
+            availableMoves.RemoveAll(s => !InsideBoard(s) || FriendlyPiece(s, board));
             return availableMoves;
-
         }
     }
 }

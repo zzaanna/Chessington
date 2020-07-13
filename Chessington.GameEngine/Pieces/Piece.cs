@@ -36,10 +36,24 @@ namespace Chessington.GameEngine.Pieces
             if (InsideBoard(square))
             {
                 var piece = board.GetPiece(square);
+                if (piece == null)
+                    return false;
                 if (piece.Player != Player)
-                {
                     return true;
-                }
+            }
+
+            return false;
+        }
+        
+        public bool FriendlyPiece(Square square, Board board)
+        {
+            if (InsideBoard(square))
+            {
+                var piece = board.GetPiece(square);
+                if (piece == null)
+                    return false;
+                if (piece.Player == Player)
+                    return true;
             }
 
             return false;
