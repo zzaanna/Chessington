@@ -15,11 +15,18 @@ namespace Chessington.GameEngine.Pieces
         
         public bool CanMove(Square square, Board board)
         {
+            if (!InsideBoard(square))
+                return false;
+            if (board.GetPiece(square) != null)
+                return false;
+            return true;
+        }
+
+        public bool InsideBoard(Square square)
+        {
             if (square.Row < 0 || square.Row > 7)
                 return false;
             if (square.Col < 0 || square.Col > 7)
-                return false;
-            if (board.GetPiece(square) != null)
                 return false;
             return true;
         }

@@ -19,7 +19,7 @@ namespace Chessington.GameEngine.Pieces
                 availableMoves.Add(Square.At(currentSquare.Row + i, currentSquare.Col + j));
 
             //Get rid of our starting location.
-            availableMoves.RemoveAll(s => s == currentSquare);
+            availableMoves.RemoveAll(s => s == currentSquare || !InsideBoard(s));
             return availableMoves;
         }
     }

@@ -34,7 +34,7 @@ namespace Chessington.GameEngine.Pieces
             var currentSquare = board.FindPiece(this);
             var nextSquare = GetNextSquare(currentSquare);
             
-            if (board.GetPiece(nextSquare) != null)
+            if (!InsideBoard(nextSquare) || board.GetPiece(nextSquare) != null)
                 return availableMoves; 
             availableMoves.Add(nextSquare);
 
@@ -45,7 +45,8 @@ namespace Chessington.GameEngine.Pieces
                     return availableMoves; 
                 availableMoves.Add(nextSquare);
             }
-
+            
+            availableMoves.RemoveAll(s => !InsideBoard(s));
             return availableMoves;
         }
     }
