@@ -13,19 +13,8 @@ namespace Chessington.GameEngine.Pieces
 
         public Player Player { get; private set; }
 
-        public virtual IEnumerable<Square> GetAvailableMoves(Board board)
-        {
-            IEnumerable<Square> availableSquares = Enumerable.Empty<Square>();
-            for (var row = 0; row < GameSettings.BoardSize; row++)
-                for (var col = 0; col < GameSettings.BoardSize; col++)
-                {
-                    var currentSquare = new Square(row, col);
-                    if (board.GetPiece(currentSquare) == null)
-                        availableSquares = availableSquares.Concat(new []{currentSquare});
-                }
-            return availableSquares;
-        }
-
+        public abstract IEnumerable<Square> GetAvailableMoves(Board board);
+        
         public void MoveTo(Board board, Square newSquare)
         {
             var currentSquare = board.FindPiece(this);
