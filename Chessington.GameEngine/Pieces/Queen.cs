@@ -17,12 +17,19 @@ namespace Chessington.GameEngine.Pieces
             
             for (int i = 0; i < GameSettings.BoardSize; i++) 
             {
+                var square = new Square();
                 for (var steps = 1; steps < GameSettings.BoardSize; steps++)
                 {
-                    var square = new Square(currentSquare.Row + directions[i,0]*steps, 
+                    square = new Square(currentSquare.Row + directions[i,0]*steps, 
                         currentSquare.Col + directions[i,1]*steps);
                     if (!CanMove(square, board))
                         break;
+                    availableMoves.Add(square);
+                }
+                
+                // check if there's an opposing piece to take
+                if (OpposingPiece(square, board))
+                {
                     availableMoves.Add(square);
                 }
             }

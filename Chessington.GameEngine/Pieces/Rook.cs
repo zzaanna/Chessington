@@ -26,14 +26,10 @@ namespace Chessington.GameEngine.Pieces
                     availableMoves.Add(square);
                 }
                 
-                // check if there's an opposing piece to take 
-                if (InsideBoard(square))
+                // check if there's an opposing piece to take
+                if (OpposingPiece(square, board))
                 {
-                    var piece = board.GetPiece(square);
-                    if (piece.Player != Player)
-                    {
-                        availableMoves.Add(square);
-                    }
+                    availableMoves.Add(square);
                 }
             }
             

@@ -31,6 +31,20 @@ namespace Chessington.GameEngine.Pieces
             return true;
         }
 
+        public bool OpposingPiece(Square square, Board board)
+        {
+            if (InsideBoard(square))
+            {
+                var piece = board.GetPiece(square);
+                if (piece.Player != Player)
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
         public abstract IEnumerable<Square> GetAvailableMoves(Board board);
         
         public void MoveTo(Board board, Square newSquare)
