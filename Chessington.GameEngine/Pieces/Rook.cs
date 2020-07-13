@@ -14,15 +14,26 @@ namespace Chessington.GameEngine.Pieces
             var currentSquare = board.FindPiece(this);
             int[,] directions = { { 1, 0 }, { -1, 0 }, { 0, 1 }, { 0, -1 } };
             
-            for (int i = 0; i < 4; i++) 
+            for (int i = 0; i < 4; i++)
             {
+                var square = new Square();
                 for (var steps = 1; steps < GameSettings.BoardSize; steps++)
                 {
-                    var square = new Square(currentSquare.Row + directions[i,0]*steps, 
+                    square = new Square(currentSquare.Row + directions[i,0]*steps, 
                         currentSquare.Col + directions[i,1]*steps);
                     if (!CanMove(square, board))
                         break;
                     availableMoves.Add(square);
+                }
+                
+                // check if there's an opposing piece to take 
+                if (InsideBoard(square))
+                {
+                    var piece = board.GetPiece(square);
+                    if (piece.Player != Player)
+                    {
+                        availableMoves.Add(square);
+                    }
                 }
             }
             
