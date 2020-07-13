@@ -12,6 +12,17 @@ namespace Chessington.GameEngine.Pieces
         }
 
         public Player Player { get; private set; }
+        
+        public bool CanMove(Square square, Board board)
+        {
+            if (square.Row < 0 || square.Row > 7)
+                return false;
+            if (square.Col < 0 || square.Col > 7)
+                return false;
+            if (board.GetPiece(square) != null)
+                return false;
+            return true;
+        }
 
         public abstract IEnumerable<Square> GetAvailableMoves(Board board);
         

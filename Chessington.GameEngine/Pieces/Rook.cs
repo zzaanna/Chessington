@@ -12,33 +12,18 @@ namespace Chessington.GameEngine.Pieces
         {
             var availableMoves = new List<Square>();
             var currentSquare = board.FindPiece(this);
-            for (var i = 1; currentSquare.Col+i < 8; i++)
+            int[,] directions = { { 1, 0 }, { -1, 0 }, { 0, 1 }, { 0, -1 } };
+            
+            for (int i = 0; i < 4; i++) 
             {
-                var square = new Square(currentSquare.Row, currentSquare.Col + i);
-                if (board.GetPiece(square) != null)
-                    break;
-                availableMoves.Add(square);
-            }
-            for (var i = 1; currentSquare.Col-i >= 0; i++)
-            {
-                var square = new Square(currentSquare.Row, currentSquare.Col - i);
-                if (board.GetPiece(square) != null)
-                    break;
-                availableMoves.Add(square);
-            }
-            for (var i = 1; currentSquare.Row+i < 8; i++)
-            {
-                var square = new Square(currentSquare.Row + i, currentSquare.Col);
-                if (board.GetPiece(square) != null)
-                    break;
-                availableMoves.Add(square);
-            }
-            for (var i = 1; currentSquare.Row-i >= 0; i++)
-            {
-                var square = new Square(currentSquare.Row - i, currentSquare.Col);
-                if (board.GetPiece(square) != null)
-                    break;
-                availableMoves.Add(square);
+                for (var steps = 1; steps < GameSettings.BoardSize; steps++)
+                {
+                    var square = new Square(currentSquare.Row + directions[i,0]*steps, 
+                        currentSquare.Col + directions[i,1]*steps);
+                    if (!CanMove(square, board))
+                        break;
+                    availableMoves.Add(square);
+                }
             }
             
             return availableMoves;
