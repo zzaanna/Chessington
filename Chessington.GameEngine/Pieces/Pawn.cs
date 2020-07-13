@@ -34,13 +34,15 @@ namespace Chessington.GameEngine.Pieces
             var currentSquare = board.FindPiece(this);
             var nextSquare = GetNextSquare(currentSquare);
             
-            if (board.GetPiece(nextSquare) == null)
-                if (nextSquare.Row > 0 && nextSquare.Row <= GameSettings.BoardSize)
-                    availableMoves.Add(nextSquare);
+            if (board.GetPiece(nextSquare) != null)
+                return availableMoves; 
+            availableMoves.Add(nextSquare);
 
             if (!HaveMoved(board))
             {
                 nextSquare = GetNextSquare(nextSquare);
+                if (board.GetPiece(nextSquare) != null)
+                    return availableMoves; 
                 availableMoves.Add(nextSquare);
             }
 
