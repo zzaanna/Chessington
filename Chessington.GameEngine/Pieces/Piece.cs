@@ -12,7 +12,9 @@ namespace Chessington.GameEngine.Pieces
         }
 
         public Player Player { get; private set; }
-        
+
+        public bool HasMoved = false;
+
         public bool CanMove(Square square, Board board)
         {
             if (!InsideBoard(square))

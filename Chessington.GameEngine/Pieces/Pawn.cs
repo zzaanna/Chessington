@@ -7,17 +7,7 @@ namespace Chessington.GameEngine.Pieces
     {
         public Pawn(Player player) 
             : base(player) { }
-
-        public bool HaveMoved(Board board)
-        {
-            int currentRow = board.FindPiece(this).Row;
-            if (Player == Player.Black && currentRow == 1)
-                return false;
-            if (Player == Player.White && currentRow == 7)
-                return false;
-            return true;
-        }
-
+        
         private Square GetNextSquare(Square currentSquare)
         {
             if (Player == Player.Black)
@@ -38,7 +28,7 @@ namespace Chessington.GameEngine.Pieces
                 return availableMoves; 
             availableMoves.Add(nextSquare);
 
-            if (!HaveMoved(board))
+            if (!HasMoved)
             {
                 nextSquare = GetNextSquare(nextSquare);
                 if (board.GetPiece(nextSquare) != null)

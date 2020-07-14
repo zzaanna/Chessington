@@ -57,6 +57,9 @@ namespace Chessington.GameEngine
                 OnPieceCaptured(board[to.Row, to.Col]);
             }
 
+            var piece = GetPiece(from);
+            piece.HasMoved = true;
+
             //Move the piece and set the 'from' square to be empty.
             board[to.Row, to.Col] = board[from.Row, from.Col];
             board[from.Row, from.Col] = null;
